@@ -1,5 +1,6 @@
 from pathlib import Path
 import subprocess
+import re
 
 # repo paths
 repo = Path(__file__).resolve().parents[1]
@@ -18,9 +19,11 @@ category = categories[choice]
 
 title = input("Recipe name: ")
 
-filename = title.lower().replace(" ", "_")
+filename = re.sub(r"[^a-z0-9]+", "_", title.lower()).strip("_")
 
 file_path = recipes_path / category / f"{filename}.md"
+
+file_path.parent.mkdir(parents=True, exist_ok=True)
 
 template = f"""---
 id: {filename}
@@ -47,5 +50,7 @@ file_path.write_text(template, encoding="utf-8")
 
 print(f"\nCreated: {file_path}")
 
-# öppna i VS Code
-subprocess.run(["code", str(file_path)])
+try:
+    subprocess.run(["code", str(file_path)])
+except FileNotFoundError:
+    print("VS Code CLI ('code') not found in PATH. File created but not opened.")
