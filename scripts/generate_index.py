@@ -50,8 +50,6 @@ def build_section(base_path):
 
 content = []
 
-content.append("\n# Recipe Index\n")
-
 content.append("\n## Cooking\n")
 content.append(build_section(recipes_path))
 
