@@ -224,9 +224,6 @@ Possible future improvements:
 
 <!-- INDEX_START -->
 
-# Recipe Index
-
-
 ## Cooking
 
 
