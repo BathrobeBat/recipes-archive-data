@@ -220,6 +220,13 @@ Possible future improvements:
 
 ---
 
+## Recipe Index
+
+<!-- INDEX_START -->
+<!-- INDEX_END -->
+
+---
+
 # License
 
 This repository is primarily intended as a personal archive and learning project.
