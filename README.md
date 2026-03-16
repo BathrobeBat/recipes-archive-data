@@ -223,6 +223,24 @@ Possible future improvements:
 ## Recipe Index
 
 <!-- INDEX_START -->
+
+# Recipe Index
+
+
+## Cooking
+
+
+#### chark (1)
+
+- [Blodleverkorv (5m nötfjälster)](recipes/chark/blodleverkorv_5m_notfjalster.md)
+
+
+## Brewing
+
+
+#### wine (1)
+
+- [Chateau de Bat](brewing/wine/chateau_de_bat.md)
 <!-- INDEX_END -->
 
 ---
