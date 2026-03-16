@@ -1,8 +1,8 @@
 # Recipe Archive Data
 
-This repository contains a structured archive of recipes stored as Markdown files with YAML metadata.
+This repository contains a structured archive of **cooking recipes and brewing recipes** stored as Markdown files with YAML metadata.
 
-The goal of this repository is to preserve family recipes in a format that is:
+The goal is to preserve handwritten and collected recipes in a format that is:
 
 * human readable
 * version controlled
@@ -10,9 +10,9 @@ The goal of this repository is to preserve family recipes in a format that is:
 * independent of any specific application
 * future-proof
 
-This repository acts as the **source of truth for recipe data**.
+The repository acts as the **source of truth** for all recipe data.
 
-Future applications (web apps, APIs, databases, etc.) will import their data from this repository.
+Future tools such as web apps, APIs, or databases can import their data directly from this archive.
 
 ---
 
@@ -30,189 +30,196 @@ recipes/
 ├── saser
 └── tillbehor
 
+brewing/
+│
+├── beer
+├── cider
+├── mead
+└── wine
+
 templates/
-└── recipe.md
+├── recipe.md
+└── brew.md
 
 scripts/
-├── new_recipe.py
-└── validate_recipes.py
-
-.github/
-└── workflows/
-    └── validate_recipes.yml
+└── new_recipe.py
 ```
+
+---
+
+# Recipe Types
+
+The repository contains two types of recipes.
+
+## Cooking Recipes
+
+Located in:
+
+```
+recipes/
+```
+
+These contain traditional cooking and baking recipes.
+
+Example:
+
+```
+recipes/chark/blodleverkorv_5m_notfjalster.md
+```
+
+---
+
+## Brewing Recipes
+
+Located in:
+
+```
+brewing/
+```
+
+These contain brewing recipes for beverages such as:
+
+* beer
+* wine
+* mead
+* cider
+
+Example:
+
+```
+brewing/wine/chateau_de_bat.md
+```
+
+---
+
+# Recipe Generator
+
+To speed up entering recipes, the repository includes a small helper script.
+
+Run:
+
+```
+recipe
+```
+
+The script will:
+
+1. Choose dataset (`recipes` or `brewing`)
+2. Choose category
+3. Enter recipe name
+4. Generate the file automatically
+5. Stage the file using `git add`
+6. Open the file in VS Code (if available)
+
+Example workflow:
+
+```
+recipe
+→ recipes / brewing
+→ category
+→ name
+```
+
+The generated file will already contain the correct template.
 
 ---
 
 # Recipe Format
 
-Recipes are written in **Markdown with YAML front matter**.
+Recipes are written using **Markdown with YAML front matter**.
 
 Example:
 
 ```markdown
 ---
-id: blodpudding
-title: Blodpudding
-author: Mamma
+id: blodleverkorv_5m_notfjalster
+title: Blodleverkorv (5m nötfjälster)
 category: chark
 tags:
-servings:
-prep_time:
-cook_time:
-
-ingredients:
-  main:
-    - item: grisblod
-      amount: 1
-      unit: liter
 ---
 
 ## Instruktioner
 
-1. Blanda blod och mjöl.
-2. Tillsätt kryddor.
-3. Grädda i ugn.
+1.
+2.
+3.
 ```
 
 ---
 
-# Scripts
+# Brewing Recipe Format
 
-## new_recipe.py
+Brewing recipes use a slightly different structure.
 
-Helper script used to create new recipes quickly.
+Example:
 
-The script will:
-
-1. Display a list of recipe categories
-2. Let the user select a category
-3. Ask for the recipe title
-4. Automatically create the Markdown file
-5. Populate the file with the recipe template
-6. Open the file directly in VS Code
-
-Example usage:
-
-```
-python scripts/new_recipe.py
-```
-
-Example workflow:
-
-```
-Select category:
-
-1. bakverk
-2. brod
-3. chark
-4. desserter
-5. drycker
-6. huvudratter
-7. saser
-8. tillbehor
-
-Category number: 3
-Recipe name: Blodpudding
-```
-
-This automatically creates:
-
-```
-recipes/chark/blodpudding.md
-```
-
-and opens it in the editor.
-
+```markdown
+---
+id: chateau_de_bat
+title: Chateau de Bat
+type: wine
+batch_size:
+og:
+fg:
+abv:
 ---
 
-## validate_recipes.py
+## Process
 
-Validation script that checks all recipes for errors.
-
-The script verifies:
-
-* YAML syntax
-* required fields
-* duplicate recipe IDs
-* valid categories
-
-Example usage:
-
+1.
+2.
+3.
 ```
-python scripts/validate_recipes.py
-```
-
----
-
-# Automated Validation
-
-This repository uses **GitHub Actions** to automatically validate all recipes on every push.
-
-The validation ensures:
-
-* recipe metadata is valid YAML
-* each recipe has a unique ID
-* categories exist
-* no corrupted recipe files exist
-
-If validation fails, the CI pipeline will block the change.
 
 ---
 
 # Workflow
 
-Typical workflow for adding recipes:
-
-1. Run the recipe helper script
+Typical workflow when adding recipes:
 
 ```
-python scripts/new_recipe.py
-```
-
-2. Write the recipe in the generated file.
-
-3. Commit the changes.
-
-```
-git add .
-git commit -m "Add recipe: blodpudding"
+recipe
+write recipe
+git commit
 git push
 ```
 
-4. GitHub automatically validates the recipes.
+Example commit messages:
+
+```
+recipe: chark/blodleverkorv
+brew: wine/chateau_de_bat
+```
 
 ---
 
 # Design Philosophy
 
-This repository follows a **data-first architecture**.
+This project follows a **data-first approach**.
 
-Key ideas:
+Recipes are stored as structured text instead of being locked inside a specific application.
 
-* Recipes are stored as plain text
-* Git provides full version history
-* The data is independent of any specific application
-* Databases and applications can be rebuilt from this repository
+Advantages:
 
-This ensures the recipe archive can survive long-term without relying on a specific platform.
+* long-term preservation
+* full version history via Git
+* easy data migration
+* simple integration with future applications
 
 ---
 
 # Future Plans
 
-Possible future integrations include:
+Possible future improvements:
 
-* automated database import
-* search and filtering
-* web interface
-* API access
-* recipe editing UI
+* automated recipe validation
+* searchable recipe interface
+* API for accessing recipes
 * OCR import for handwritten recipes
+* brewing log support
 
 ---
 
 # License
 
-This repository is intended primarily for personal archival purposes.
-
+This repository is primarily intended as a personal archive and learning project.
